@@ -3381,7 +3381,7 @@ input, select, textarea {
 	  */
 	  
 	  .menu {
-		width:22vw;
+		width:18vw;
 		min-width:20ch;
 		display:flex;
 		flex-flow:column nowrap;
