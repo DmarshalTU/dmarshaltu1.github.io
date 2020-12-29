@@ -3381,8 +3381,8 @@ input, select, textarea {
 	  */
 	  
 	  .menu {
-		width:18vw;
-		min-width:20ch;
+		width:16vw;
+		min-width:16ch;
 		display:flex;
 		flex-flow:column nowrap;
 		font:bold 2.4rem/1 'IM Fell English SC', serif;
