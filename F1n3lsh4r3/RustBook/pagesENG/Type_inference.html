@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Type inference</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="type-inference">Type inference</h1>
+<p><strong>Type inference</strong> means that if you don't tell the compiler the type, but it can decide by itself, it will decide. The compiler always needs to know the type of the variables, but you don’t always need to tell it. Actually, usually you don't need to tell it. For example, for <em>let my_number = 8</em>, <em>my_number</em> will be an <em>i32</em>. That is because the compiler chooses <em>i32</em> for integers if you don't tell it. But if you say <em>let my_number: u8 = 8</em>, it will make my_number a <em>u8</em>, because you told it <em>u8</em>.</p>
+<p>So usually the compiler can guess. But sometimes you need to tell it, for two reasons:</p>
+<pre><code>You are doing something very complex and the compiler doesn't know the type you want.
+You want a different type (for example, you want an i128, not an i32).
+</code></pre>
+<p>To specify a type, add a colon after the variable name.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> small_number: <span class="hljs-built_in">u8</span> = <span class="hljs-number">10</span>;
+}
+</div></code></pre>
+<p>For numbers, you can say the type after the number. You don't need a space - just type it right after the number.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> small_number = <span class="hljs-number">10u8</span>; <span class="hljs-comment">// 10u8 = 10 of type u8</span>
+}
+</div></code></pre>
+<p>You can also add _ if you want to make the number easy to read.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> small_number = <span class="hljs-number">10_u8</span>; <span class="hljs-comment">// This is easier to read</span>
+    <span class="hljs-keyword">let</span> big_number = <span class="hljs-number">100_000_000_i32</span>; <span class="hljs-comment">// 100 million is easy to read with _</span>
+}
+</div></code></pre>
+<p>The _ does not change the number. It is only to make it easy for you to read. And it doesn't matter how many _ you use:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> number = <span class="hljs-number">0________u8</span>;
+    <span class="hljs-keyword">let</span> number2 = <span class="hljs-number">1___6______2____4______i32</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}, {}"</span>, number, number2);
+}
+</div></code></pre>
+<p>This prints 0, 1624.</p>
+
+<br>
+<button onclick="window.location.href='./Types.html';">
+    back 
+  </button>
+    <button onclick="window.location.href='./Floats.html';">
+    next
+  </button>
+    </body>
+    </html>

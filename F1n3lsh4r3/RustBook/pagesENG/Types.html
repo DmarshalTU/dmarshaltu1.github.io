@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Types</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="types">Types</h1>
+<p><strong>Rust</strong> has many types that let you work with numbers, characters, and so on. Some are simple, others are more complicated, and you can even create your own.
+Primitive types</p>
+<p>Rust has simple types that are called primitive types (<em>primitive = very basic</em>). We will start with integers and char (<em>characters</em>). Integers are whole numbers with no decimal point. There are two types of integers:</p>
+<pre><code>Signed integers,
+Unsigned integers.
+</code></pre>
+<p>Signs means &quot; + &quot; (plus sign) and &quot; - &quot; (minus sign), so signed integers can be positive or negative (e.g. <em>+8, -8</em>). But unsigned integers can only be positive, because they do not have a sign.</p>
+<p>The signed integers are: <em>i8, i16, i32, i64, i128, and isize</em>. The unsigned integers are: <em>u8, u16, u32, u64, u128, and usize</em>.</p>
+<p>The number after the i or the u means the number of bits for the number, so numbers with more bits can be larger. <em>8</em> bits = one byte, so <em>i8</em> is one byte, <em>i64</em> is <em>8</em> bytes, and so on. Number types with larger sizes can hold larger numbers. For example, a u8 can hold up to 255, but a u16 can hold up to <em>65535</em>. And a <em>u128</em> can hold up to <em>340282366920938463463374607431768211455</em>.</p>
+<p>So what is isize and usize? This means the number of bits on your type of computer. (The number of bits on your computer is called the architecture of your computer.) So isize and usize on a <em>32-bit</em> computer is like <em>i32</em> and <em>u32</em>, and isize and usize on a <em>64-bit</em> computer is like <em>i64</em> and <em>u64</em>.</p>
+<p>There are many reasons for the different types of integers. One reason is computer performance: a smaller number of bytes is faster to process. For example, the number -<em>10</em> as an <em>i8</em> is <em>11110110</em>, but as an <em>i128</em> it is <em>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110110</em>. But here are some other uses:</p>
+<p>Characters in Rust are called char. Every char has a number: the letter A is number <em>65</em>, while the character <em>友</em> (&quot;friend&quot; in Chinese) is number <em>21451</em>. The list of numbers is called &quot;Unicode&quot;. Unicode uses smaller numbers for characters that are used more, like <em>A</em> through <em>Z</em>, or digits <em>0</em> through <em>9</em>, or <em>space</em>.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> first_letter = <span class="hljs-string">'A'</span>;
+    <span class="hljs-keyword">let</span> space = <span class="hljs-string">' '</span>; <span class="hljs-comment">// A space inside ' ' is also a char</span>
+    <span class="hljs-keyword">let</span> other_language_char = <span class="hljs-string">'Ꮔ'</span>; <span class="hljs-comment">// Thanks to Unicode, other languages like Cherokee display just fine too</span>
+    <span class="hljs-keyword">let</span> cat_face = '😺'; <span class="hljs-comment">// Emojis are chars too</span>
+}
+</div></code></pre>
+<p>The characters that are used most have numbers less than <em>256</em>, and they can fit into a <em>u8</em>. Remember, a <em>u8</em> is <em>0</em> plus all the numbers up to <em>255</em>, for <em>256</em> in total. This means that Rust can safely cast a <em>u8</em> into a char, using as. (&quot;Cast <em>u8</em> as char&quot; means &quot;pretend <em>u8</em> is a char&quot;)</p>
+<p>Casting with as is useful because Rust is very strict. It always needs to know the type, and won't let you use two different types together even if they are both integers. For example, this will not work:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() { <span class="hljs-comment">// main() is where Rust programs start to run. Code goes inside {} (curly brackets)</span>
+
+    <span class="hljs-keyword">let</span> my_number = <span class="hljs-number">100</span>; <span class="hljs-comment">// We didn't write a type of integer,</span>
+                         <span class="hljs-comment">// so Rust chooses i32. Rust always</span>
+                         <span class="hljs-comment">// chooses i32 for integers if you don't</span>
+                         <span class="hljs-comment">// tell it to use a different type</span>
+			 
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, my_number <span class="hljs-keyword">as</span> <span class="hljs-built_in">char</span>); <span class="hljs-comment">// ⚠️</span>
+}
+</div></code></pre>
+<p>Here is the reason:</p>
+<pre><code class="language-rust"><div>error[E0604]: only `<span class="hljs-built_in">u8</span>` can <span class="hljs-keyword">be</span> cast <span class="hljs-keyword">as</span> `<span class="hljs-built_in">char</span>`, not `<span class="hljs-built_in">i32</span>`
+ --&gt; src\main.rs:<span class="hljs-number">3</span>:<span class="hljs-number">20</span>
+  |
+<span class="hljs-number">3</span> |     <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, my_number <span class="hljs-keyword">as</span> <span class="hljs-built_in">char</span>);
+  |                    ^^^^^^^^^^^^^^^^^
+</div></code></pre>
+<p>Fortunately we can easily fix this with as. We can't cast <em>i32</em> as a char, but we can cast an <em>i32</em> as a u8. And then we can do the same from <em>u8</em> to char. So in one line we use as to make my_number a <em>u8</em>, and again to make it a char. Now it will compile:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_number = <span class="hljs-number">100</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, my_number <span class="hljs-keyword">as</span> <span class="hljs-built_in">u8</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">char</span>);
+}
+</div></code></pre>
+<p>It prints d because that is the char in place 100.</p>
+<p>The easier way, however, is just to tell Rust that <em>my_number</em> is a <em>u8</em>. Here's how you do it:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_number: <span class="hljs-built_in">u8</span> = <span class="hljs-number">100</span>; <span class="hljs-comment">//  change my_number to my_number: u8</span>
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, my_number <span class="hljs-keyword">as</span> <span class="hljs-built_in">char</span>);
+}
+</div></code></pre>
+<p>So those are two reasons for all the different number types in Rust. Here is another reason: usize is the size that Rust uses for indexing. (Indexing means &quot;which item is first&quot;, &quot;which item is second&quot;, etc.) <em>usize</em> is the best size for indexing because:</p>
+<pre><code>An index can't be negative, so it needs to be a number with a u
+It should be big, because sometimes you need to index many things, but
+It can't be a u64 because 32-bit computers can't use u64.
+</code></pre>
+<p>So Rust uses <em>usize</em> so that your computer can get the biggest number for indexing that it can read.</p>
+<p>Let's learn some more about <em>char</em>. You saw that a char is always one character, and uses '' instead of &quot;&quot;.</p>
+<p>All chars are 4 bytes. They are 4 bytes because some characters in a string are more than one byte. Basic letters that have always been on computers are 1 byte, later characters are 2 bytes, and others are 3 and 4. A char needs to be 4 bytes so that it can hold any kind of character.</p>
+<p>We can use <em>.len()</em> to see this for ourselves:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, <span class="hljs-string">"a"</span>.len()); <span class="hljs-comment">// .len() gives the size in bytes</span>
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, <span class="hljs-string">"ß"</span>.len());
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, <span class="hljs-string">"国"</span>.len());
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, <span class="hljs-string">"𓅱"</span>.len());
+}
+</div></code></pre>
+<p>This prints:</p>
+<pre><code class="language-rust"><div><span class="hljs-number">1</span>
+<span class="hljs-number">2</span>
+<span class="hljs-number">3</span>
+<span class="hljs-number">4</span>
+</div></code></pre>
+<p>You can see that a is one byte, the German <em>ß</em> is two, the Japanese <em>国</em> is three, and the ancient Egyptian <em>𓅱</em> is 4 bytes.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> slice = <span class="hljs-string">"Hello!"</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Slice is {} bytes."</span>, slice.len());
+    <span class="hljs-keyword">let</span> slice2 = <span class="hljs-string">"안녕!"</span>; <span class="hljs-comment">// Korean for "hi"</span>
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Slice2 is {} bytes."</span>, slice2.len());
+}
+</div></code></pre>
+<p>This prints:</p>
+<pre><code class="language-rust"><div>Slice is <span class="hljs-number">6</span> bytes.
+Slice2 is <span class="hljs-number">7</span> bytes.
+</div></code></pre>
+<p><em>slice is 6 characters in length and 6 bytes, but slice2 is 3 characters in length and 7 bytes.</em></p>
+<p>If <em>.len()</em> gives the size in bytes, what about the size in characters? We will learn about these methods later, but you can just remember that <em>.chars().count()</em> will do it. <em>.chars().count()</em> turns what you wrote into characters and then counts how many there are.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> slice = <span class="hljs-string">"Hello!"</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Slice is {} bytes and also {} characters."</span>, slice.len(), slice.chars().count());
+    <span class="hljs-keyword">let</span> slice2 = <span class="hljs-string">"안녕!"</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Slice2 is {} bytes but only {} characters."</span>, slice2.len(), slice2.chars().count());
+}
+</div></code></pre>
+<p>This prints:</p>
+<pre><code class="language-rust"><div>Slice is <span class="hljs-number">6</span> bytes and also <span class="hljs-number">6</span> characters.
+Slice2 is <span class="hljs-number">7</span> bytes but only <span class="hljs-number">3</span> characters.
+</div></code></pre>
+
+<br><button onclick="window.location.href='./Comments.html';">
+    back 
+  </button>
+<button onclick="window.location.href='./Type_inference.html';">
+    next
+  </button>
+    </body>
+    </html>

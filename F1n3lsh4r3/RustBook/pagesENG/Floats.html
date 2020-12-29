@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Floats</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="floats">Floats</h1>
+<p><strong>Floats</strong> are numbers with decimal points. 5.5 is a float, and 6 is an integer. 5.0 is also a float, and even 5. is a float.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_float = <span class="hljs-number">5</span>.; <span class="hljs-comment">// Rust sees . and knows that it is a float</span>
+}
+</div></code></pre>
+<p>But the types are not called float, they are called <em>f32</em> and <em>f64</em>. It is the same as integers: the number after f shows the number of bits. If you don't write the type, Rust will choose <em>f64</em>.</p>
+<p>Of course, only floats of the same type can be used together. So you can't add an <em>f32</em> to an <em>f64</em>.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_float: <span class="hljs-built_in">f64</span> = <span class="hljs-number">5.0</span>; <span class="hljs-comment">// This is an f64</span>
+    <span class="hljs-keyword">let</span> my_other_float: <span class="hljs-built_in">f32</span> = <span class="hljs-number">8.5</span>; <span class="hljs-comment">// This is an f32</span>
+
+    <span class="hljs-keyword">let</span> third_float = my_float + my_other_float; <span class="hljs-comment">// ⚠️</span>
+}
+</div></code></pre>
+<p>When you try to run this, Rust will say:</p>
+<pre><code class="language-rust"><div>error[E0308]: mismatched types
+ --&gt; src\main.rs:<span class="hljs-number">5</span>:<span class="hljs-number">34</span>
+  |
+<span class="hljs-number">5</span> |     <span class="hljs-keyword">let</span> third_float = my_float + my_other_float;
+  |                                  ^^^^^^^^^^^^^^ expected `<span class="hljs-built_in">f64</span>`, found `<span class="hljs-built_in">f32</span>`
+</div></code></pre>
+<p>The compiler writes &quot;expected (type), found (type)&quot; when you use the wrong type. It reads your code like this:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_float: <span class="hljs-built_in">f64</span> = <span class="hljs-number">5.0</span>; <span class="hljs-comment">// The compiler sees an f64</span>
+    <span class="hljs-keyword">let</span> my_other_float: <span class="hljs-built_in">f32</span> = <span class="hljs-number">8.5</span>; <span class="hljs-comment">// The compiler sees an f32. It is a different type.</span>
+    <span class="hljs-keyword">let</span> third_float = my_float + <span class="hljs-comment">// You want to add my_float to something, so it must be an f64 plus another f64. Now it expects an f64...</span>
+    <span class="hljs-keyword">let</span> third_float = my_float + my_other_float;  <span class="hljs-comment">// ⚠️ but it found an f32. It can't add them.</span>
+}
+</div></code></pre>
+<p>So when you see &quot;expected (type), found (type)&quot;, you must find why the compiler expected a different type.</p>
+<p>Of course, with simple numbers it is easy to fix. You can cast the <em>f32</em> to an <em>f64</em> with as:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_float: <span class="hljs-built_in">f64</span> = <span class="hljs-number">5.0</span>;
+    <span class="hljs-keyword">let</span> my_other_float: <span class="hljs-built_in">f32</span> = <span class="hljs-number">8.5</span>;
+
+    <span class="hljs-keyword">let</span> third_float = my_float + my_other_float <span class="hljs-keyword">as</span> <span class="hljs-built_in">f64</span>; <span class="hljs-comment">// my_other_float as f64 = use my_other_float like an f64</span>
+}
+</div></code></pre>
+<p>Or even more simply, remove the type declarations. (&quot;to declare a type&quot; = &quot;to tell Rust to use the type&quot;) Rust will choose types that can add together.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_float = <span class="hljs-number">5.0</span>; <span class="hljs-comment">// Rust will choose f64</span>
+    <span class="hljs-keyword">let</span> my_other_float = <span class="hljs-number">8.5</span>; <span class="hljs-comment">// Here again it will choose f64</span>
+
+    <span class="hljs-keyword">let</span> third_float = my_float + my_other_float;
+}
+</div></code></pre>
+<p>The Rust compiler is smart and will not choose <em>f64</em> if you need <em>f32</em>:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_float: <span class="hljs-built_in">f32</span> = <span class="hljs-number">5.0</span>;
+    <span class="hljs-keyword">let</span> my_other_float = <span class="hljs-number">8.5</span>; <span class="hljs-comment">// Usually Rust would choose f64,</span>
+
+    <span class="hljs-keyword">let</span> third_float = my_float + my_other_float; <span class="hljs-comment">// but now it knows that you need to add it to an f32. So it chooses f32 for my_other_float too</span>
+}
+</div></code></pre>
+
+<br>
+<button onclick="window.location.href='./Type_inference.html';">
+    back 
+  </button>
+    <button onclick="window.location.href='#';">
+    next
+  </button>
+    </body>
+    </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Comments</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="comments">Comments</h1>
+<p>Comments are made for programmers to read, not the computer. It's good to write comments to help other people understand your code. It's also good to help you understand your code later. (Many people write good code but then forget why they wrote it.) To write comments in Rust you usually use //:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-comment">// Rust programs start with fn main()</span>
+    <span class="hljs-comment">// You put the code inside a block. It starts with { and ends with }</span>
+    <span class="hljs-keyword">let</span> some_number = <span class="hljs-number">100</span>; <span class="hljs-comment">// We can write as much as we want here and the compiler won't look at it</span>
+}
+</div></code></pre>
+<p>When you do this, the compiler won't look at anything to the right of the //.</p>
+<p>There is another kind of comment that you write with /* to start and */ to end. This one is useful to write in the middle of your code.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> some_number<span class="hljs-comment">/*: i16*/</span> = <span class="hljs-number">100</span>;
+}
+</div></code></pre>
+<p>To the compiler, <code>rust let some_number/*: i16*/ = 100;</code> looks like <code>rust let some_number = 100; </code>.</p>
+<p>The /* <em>/ form is also useful for very long comments over more than one line. In this example you can see that you need to write // for every line. But if you type /</em>, it won't stop until you finish it with */.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> some_number = <span class="hljs-number">100</span>; <span class="hljs-comment">/* Let me tell you
+    a little about this number.
+    It's 100, which is my favourite number.
+    It's called some_number but actually I think that... */</span>
+
+    <span class="hljs-keyword">let</span> some_number = <span class="hljs-number">100</span>; <span class="hljs-comment">// Let me tell you</span>
+    <span class="hljs-comment">// a little about this number.</span>
+    <span class="hljs-comment">// It's 100, which is my favourite number.</span>
+    <span class="hljs-comment">// It's called some_number but actually I think that...</span>
+}
+</div></code></pre>
+
+<br>
+<br><button onclick="window.location.href='../index.html';">
+    back 
+  </button>
+<button onclick="window.location.href='./Types.html';">
+    next
+  </button>
+    </body>
+    </html>

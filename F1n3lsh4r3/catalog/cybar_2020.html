@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CYBAR OSINT CTF 2020</title>
+        
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+    <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            h1, p, h2, button {
+                direction: rtl;
+            }
+            #divfix {
+                bottom: 0;
+                right: 100;
+                position: fixed;
+                z-index: 3000;
+}
+    </style>
+    <style>
+        .task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+    </style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="טיפוסים-של-משתנים">CYBAR OSINT CTF 2020</h1>
+
+        <p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/063af4434d44654b810f8.png" alt="" /></p>
+
+<p>ב-<strong>6</strong> ליוני התקיימה תחרות אוסינט ע''י פריבסק (PRIVASEC ) האוסטרליים, שכללה 161 קבוצות מכל העולם וכמו שהמארגנים עצמם אומרים:</p>
+
+<pre style="direction: rtl;"><code>
+    CYBAR-
+     הוא אירוע ללא מטרות רווח במלבורן, אוסטרליה,
+      עבור סטודנטים המעוניינים בסייבר אבטחה או בטכנולוגיה לפגוש אחרים עם תחומי עניין דומים, להתמודד ב- CTF על פרסים מדליקים,
+       לשתף רעיונות כל הרווחים מהאירוע יועברו לארגון צדקה עליו הצביעו המשתתפים.
+</code></pre>
+
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/47db99ecf05b813fd65ca.png" alt="" /></p>
+
+<p>לאור הקורונה התחרות נפתחה אונליין ובכך אפשרה לקבוצות מכולם העולם להתנסות ללא עלות.</p>
+
+<p>דגימה קטנה מהתוצאות:</p>
+
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/cd9b83ece565633024153.png" alt="" /></p>
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/5383baf91d05ae5d9c9e2.png" alt="" /></p>
+
+<p>כל המידע שרק אפשר לבקש המארגנים העלו ל-github:</p>
+<p><a href="https://github.com/cybar-party/cybar-osint-ctf-2020">קישור</a></p>
+<p>חשוב לציין, שאם מישהו מעוניין להוריד את ה-CTF ולנסות לעבור אותו באופן עצמאי, המדריך כאן:</p>
+<p><a href="https://github.com/cybar-party/cybar-osint-ctf-2020/blob/master/Host%20CTF/README.md">קישור</a></p>
+<br>
+
+<p>הקדמה:</p>
+
+<p>לחובבי הז'אנר הפורמט גם הפעם נשאר ללא שינוי, התקדמות במשימות ולחפש פתרונות בצורת דגלים(FLAGS) שהפעם הופיעו בצורה כזאת:</p>
+
+<pre style="direction: rtl;"><code>CYBAR{banana}
+</code></pre>
+
+<p>המשימה הראשונה, Tutorial Island, התמקדה בהבהרת חוקים והסברים ומטרתה הייתה למצוא שם הזמר לפי שורה משיר:</p>
+
+<p>"In the name of the Spam God, that's what's up"</p>
+
+<p>שלפי חיפוש גוגל פשוט נתנה לנו את התשובה:</p>
+
+<p>YTCracker</p>
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/4419d2e121fb74f2e044a.png" alt="" /></p>
+<br>
+
+
+
+<p>פתיחה נחמדה שמזכה אותנו ב-50 נקודות ופותחת את המשימות בקטגורית-GENERAL, חוץ מהמשימה האחרונה שנתפחה בסוף.</p>
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/218f370a0cc9c94d67b94.png" alt="" /></p>
+<br>
+
+
+<p>קטגוריה SOCIAL</p>
+
+<p>העלילה העיקרית של CTF היה לחפש מידע על Roombas: קבוצה של אנשים אשר  מנסה "להשתלט על העולם". המשימות בקטגוריה זו הוקדשו לחלוטין למציאת מידע עליהם.</p>
+
+<p>You've heard of elf on the shelf, but what about the proliferation of COVID-19?</p>
+
+<p>אנו לומדים כי Roombas הם חברים קרובים, וכולם נגועים ב- COVID-19. אנחנו צריכים לאתר אותם, ויש לנו קצה חוט: Marc Hevis מסוימים, שותף של Hevis נכסים בע''מ.</p>
+
+<p> מהו חשבון הטוויטר שלו?</p>
+
+<p>ושוב חיפוש בגוגל נותן לנו דף ועוד 50 נקודות. לאחר מכן, כל הפעילויות העוקבות נפתחו.</p>
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/84b9560047ec3313debe6.png" alt="" /></p>
+<br>
+
+
+<p>Clocking Overtime</p>
+
+<p>מצאו את המיקום הגאוגרפי שבו ממוקמת העבודה של מארק.</p>
+
+<p>התשובה לשאלה זו אינה כה ברורה. ב tweets של מארק יש פוסטים שבברור יכולים להיות המפתחות, אבל המידע הזה לא נמצא בשום מקום. איפה לחפש אותו?</p>
+
+<p>קודם כל, חשוב לזכור כי יש גם תשובות לטוויטים אחרים, אשר נראים בכרטיסיה המתאימה לאחר התחברות. מתחברים ווואלה:</p>
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/e35def536cca731e70e2a.png" alt="" /></p>
+<br>
+
+
+<p>אז מארק עובד על קו הרכבת הסופי של Werribee, פרבר של מלבורן. נסה את זה כתשובה, ובינגו! .225 נקודות</p>
+
+<p>דרך אגב, הרמז במשימה זו הוא בדיוק בכותרת. כפי שאנו נראה עוד, יוצרי CTF לא התקמצנו על "רמזים" כאלה.</p>
+
+<p>Pretty Fly for a WiFi</p>
+
+<p>, לפי כמה דיווחים. למארק יש גם משרד חדש , אנחנו צריכים להבין את זה. ורק בטוויטר ובכן, כבר הבחנו בהודעה מעניינת בחשבונו, ומשם הכל הופך להיות יותר ברור.</p>
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/0484f8eafc8b9b8ee12f2.png" alt="" /></p>
+<br>
+
+
+<p>יש לנו את השם WiFi ואפילו BSSID שלה בידיים. נזכיר כי ישנם מספר שירותים אשר צוברים נתונים כאלה, מציגים על המפה ואף מאפשרים לך לחפש. אחד מהשירותים הללו הוא Wigle.</p>
+
+<p>נשתמש בפילטר על הנתונים הידועים לנו ובמהירות נמצא את הנקודה הנכונה באוסטרליה. אנחנו מגדילים את קנה המידה ומקבלים את העיר Ballarat, ואיתה 250 נקודות.</p>
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://telegra.ph/file/ccfd8e2c87e89afaa594f.png" alt="" /></p>
+<br>
+
+
+<p>המשך יבוא...</p>
+
+
+
+
+
+<br>
+<div id="divfix"><button onclick="window.location.href='../index.html';">
+    חזור
+  </button>
+</div>
+    </body>
+    </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>הסקת טיפוס</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            h1, p, h2, button {
+                direction: rtl;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="הסקת-טיפוס">הסקת טיפוס</h1>
+<p> הסקת טיפוס  פירושה שאם לא תגיד למהדר את הסוג ואם הוא יכול להחליט בעצמו, הוא יחליט. המהדר תמיד צריך לדעת את סוג המשתנים, אך לא תמיד צריך להגדיר לו זאת. למעשה, בדרך כלל אינך צריך לעשות זאת. לדוגמא, עבור  my_number = 8 ,  let my_number  יהיה  i32 . הסיבה לכך היא שהמהדר בוחר  i32  למספרים שלמים אם אינך אומר זאת. אבל אם אתה אומר  תן למספר שלי: u8 = 8 , זה יהפוך את המספר שלי ל-  u8 , כי אמרת את זה  u8 .</p>
+<p>אז בדרך כלל המהדר יכול לנחש. אבל לפעמים אתה צריך לספר את זה משתי סיבות:</p>
+<pre style="direction: rtl;"><code>אתה עושה משהו מאוד מורכב והמהדר לא יודע את הסוג שאתה רוצה.
+אתה רוצה סוג אחר (למשל, אתה רוצה i128, ולא i32).
+</code></pre>
+<p>כדי לציין סוג, הוסף נקודתיים אחרי שם המשתנה.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> small_number: <span class="hljs-built_in">u8</span> = <span class="hljs-number">10</span>;
+}
+</div></code></pre>
+<p>עבור מספרים, אתה יכול לומר את הסוג שאחרי המספר. אתה לא צריך רווח - פשוט הקלד אותו מיד אחרי המספר.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> small_number = <span class="hljs-number">10u8</span>; <span class="hljs-comment">// 10u8 = 10 of type u8</span>
+}
+</div></code></pre>
+<p>אתה יכול גם להוסיף _ אם אתה רוצה להקל על המספר לקריאה.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> small_number = <span class="hljs-number">10_u8</span>; <span class="hljs-comment">// This is easier to read</span>
+    <span class="hljs-keyword">let</span> big_number = <span class="hljs-number">100_000_000_i32</span>; <span class="hljs-comment">// 100 million is easy to read with _</span>
+}
+</div></code></pre>
+<p>ה- _ אינו משנה את המספר. זה רק כדי להקל עליך לקרוא. וזה לא משנה בכמה _ אתה משתמש:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> number = <span class="hljs-number">0________u8</span>;
+    <span class="hljs-keyword">let</span> number2 = <span class="hljs-number">1___6______2____4______i32</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}, {}"</span>, number, number2);
+}
+</div></code></pre>
+<p>זה מדפיס 0, 1624.</p>
+
+<br>
+<button onclick="window.location.href='#';">
+    הבא 
+  </button>
+    <button onclick="window.location.href='./Types.html';">
+    קודם
+  </button>
+    </body>
+    </html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Printing 'hello, world!'</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="printing-hello-world">Printing 'hello, world!'</h1>
+<p>When you start a new Rust program, it always has this code:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Hello, world!"</span>);
+}
+</div></code></pre>
+<p><code>fn means</code> function,
+main is the function that starts the program,
+() means that we didn't give the function any variables to start.
+{} is called a code block. This is the space where code lives.</p>
+<p>println! is a macro that prints to the console. A macro is like a function that writes code for you. Macros have a ! after them. We will learn about making macros later. For now, remember that ! means that it is a macro.</p>
+<p>To learn about the ;, we will create another function. First, in main we will print a number 8:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Hello, world number {}!"</span>, <span class="hljs-number">8</span>);
+}
+</div></code></pre>
+<p>The {} in println! means &quot;put the variable inside here&quot;. This prints Hello, world number 8!.</p>
+<p>We can put more in, just like we did before:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Hello, worlds number {} and {}!"</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>);
+}
+</div></code></pre>
+<p>This prints Hello, worlds number 8 and 9!.</p>
+<p>Now let's create the function.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">number</span></span>() -&gt; <span class="hljs-built_in">i32</span> {
+    <span class="hljs-number">8</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Hello, world number {}!"</span>, number());
+}
+</div></code></pre>
+<p>This also prints Hello, world number 8!. When Rust looks at number() it sees a function. This function:</p>
+<p>Does not take anything (because it has ())
+Returns an i32. The -&gt; (called a &quot;skinny arrow&quot;) shows what the function returns.
+Inside the function is just 8. Because there is no ;, this is the value it returns. If it had a ;, it would not return anything (it would return a ()). Rust will not compile this if it has a ;, because the return is i32 and ; returns (), not i32:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Hello, world number {}"</span>, number());
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">number</span></span>() -&gt; <span class="hljs-built_in">i32</span> {
+    <span class="hljs-number">8</span>;  <span class="hljs-comment">// ⚠️</span>
+}
+</div></code></pre>
+<pre><code class="language-rust"><div><span class="hljs-number">5</span> | <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">number</span></span>() -&gt; <span class="hljs-built_in">i32</span> {
+  |    ------      ^^^ expected `<span class="hljs-built_in">i32</span>`, found `()`
+  |    |
+  |    implicitly returns `()` <span class="hljs-keyword">as</span> its body has no tail or `<span class="hljs-keyword">return</span>` expression
+<span class="hljs-number">6</span> |     <span class="hljs-number">8</span>;
+  |      - help: consider removing this semicolon
+</div></code></pre>
+<p>This means &quot;you told me that number() returns an i32, but you added a ; so it doesn't return anything&quot;. So the compiler suggests removing the semicolon.</p>
+<p>You can also write return 8; but in Rust it is normal to just remove the ; to return.</p>
+<p>When you want to give variables to a function, put them inside the (). You have to give them a name and write the type.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">multiply</span></span>(number_one: <span class="hljs-built_in">i32</span>, number_two: <span class="hljs-built_in">i32</span>) { <span class="hljs-comment">// Two i32s will enter the function. We will call them number_one and number_two.</span>
+    <span class="hljs-keyword">let</span> result = number_one * number_two;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{} times {} is {}"</span>, number_one, number_two, result);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    multiply(<span class="hljs-number">8</span>, <span class="hljs-number">9</span>); <span class="hljs-comment">// We can give the numbers directly</span>
+    <span class="hljs-keyword">let</span> some_number = <span class="hljs-number">10</span>; <span class="hljs-comment">// Or we can declare two variables</span>
+    <span class="hljs-keyword">let</span> some_other_number = <span class="hljs-number">2</span>;
+    multiply(some_number, some_other_number); <span class="hljs-comment">// and put them in the function</span>
+}
+</div></code></pre>
+<p>We can also return an i32. Just take out the semicolon at the end:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">multiply</span></span>(number_one: <span class="hljs-built_in">i32</span>, number_two: <span class="hljs-built_in">i32</span>) -&gt; <span class="hljs-built_in">i32</span> {
+    <span class="hljs-keyword">let</span> result = number_one * number_two;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{} times {} is {}"</span>, number_one, number_two, result);
+    result <span class="hljs-comment">// this is the i32 that we return</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> multiply_result = multiply(<span class="hljs-number">8</span>, <span class="hljs-number">9</span>); <span class="hljs-comment">// We used multiply() to print and to give the result to multiply_result</span>
+}
+</div></code></pre>
+<p>Declaring variables and code blocks
+Use let to declare a variable (declare a variable = tell Rust to make a variable).</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_number = <span class="hljs-number">8</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Hello, number {}"</span>, my_number);
+}
+</div></code></pre>
+<p>Variables start and end inside a code block {}. In this example, my_number ends before we call println!, because it is inside its own code block.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    {
+        <span class="hljs-keyword">let</span> my_number = <span class="hljs-number">8</span>; <span class="hljs-comment">// my_number starts here</span>
+                           <span class="hljs-comment">// my_number ends here!</span>
+    }
+
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Hello, number {}"</span>, my_number); <span class="hljs-comment">// ⚠️ there is no my_number and</span>
+                                             <span class="hljs-comment">// println!() can't find it</span>
+}
+</div></code></pre>
+<p>You can use a code block to return a value:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_number = {
+    <span class="hljs-keyword">let</span> second_number = <span class="hljs-number">8</span>;
+        second_number + <span class="hljs-number">9</span> <span class="hljs-comment">// No semicolon, so the code block returns 8 + 9.</span>
+                          <span class="hljs-comment">// It works just like a function</span>
+    };
+
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"My number is: {}"</span>, my_number);
+}
+</div></code></pre>
+<p>If you add a semicolon inside the block, it will return () (nothing):</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_number = {
+    <span class="hljs-keyword">let</span> second_number = <span class="hljs-number">8</span>; <span class="hljs-comment">// declare second_number,</span>
+        second_number + <span class="hljs-number">9</span>; <span class="hljs-comment">// add 9 to second_number</span>
+                           <span class="hljs-comment">// but we didn't return it!</span>
+                           <span class="hljs-comment">// second_number dies now</span>
+    };
+
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"My number is: {:?}"</span>, my_number); <span class="hljs-comment">// my_number is ()</span>
+}
+</div></code></pre>
+<p>So why did we write {:?} and not {}? We will talk about that now.</p>
+
+    </body>
+    </html>

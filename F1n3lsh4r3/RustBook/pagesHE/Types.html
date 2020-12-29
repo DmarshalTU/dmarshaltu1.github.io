@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>טיפוסים של משתנים</title>
+        
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+    <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            h1, p, h2, button {
+                direction: rtl;
+            }
+    </style>
+    <style>
+        .task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+    </style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="טיפוסים-של-משתנים">טיפוסים של משתנים</h1>
+<p>ל-<strong>RUST</strong> יש ​​טיפוסים רבים של משתנים המאפשרים לך לעבוד עם מספרים, תווים וכן הלאה. חלקם פשוטים, אחרים מסובכים יותר, ואפילו תוכלו ליצור טיפוסים משלכם.</p>
+<h2 id="טיפוסים-פרימיטיביים">טיפוסים פרימיטיביים</h2>
+<p>ל-RUST יש ​​סוגים משתנים פשוטים הנקראים:פרימיטיביים (פרימיטיביים = בסיסיים מאוד). נתחיל במספרים שלמים ובתווים. מספרים שלמים הם מספרים שלמים ללא נקודה עשרונית. ישנם שני סוגים של מספרים שלמים:</p>
+<pre style="direction: rtl;"><code>מספרים שלמים עם סימן,
+מספרים שלמים ללא סימן.
+</code></pre>
+<p>סימנים פירושם &quot; + &quot; (סימן פלוס) ו- &quot; - &quot; (סימן מינוס), ולכן מספרים שלמים עם סימן יכולים להיות חיוביים או שליליים (למשל +8, -8). אך מספרים שלמים ללא סימן יכולים להיות חיוביים בלבד מכיוון שאין להם סימן.</p>
+<p>המספרים השלמים עם סימן הם: i8, i16, i32, i64, i128 ו- isize. המספרים השלמים שללא סימן הם: u8, u16, u32, u64, u128, andize.</p>
+<p>המספר אחרי ה- i או- u פירושו מספר הביטים עבור המספר, כך שמספרים עם יותר ביטים יכולים להיות גדולים יותר. 8 ביטים = בית אחד, אז i8 הוא בית אחד, i64 הוא 8 בתים, וכן הלאה. טיפוסי שלמים בגדלים גדולים יותר יכולים להכיל מספרים גדולים יותר. לדוגמה, u8 יכול להכיל עד 255, אבל u16 יכול להחזיק עד 65535. ו- u128 יכול להחזיק עד 340282366920938463463374607431768211455.</p>
+<p>אז מה זה isize ושימושו? פירוש הדבר מספר הסיביות בסוג המחשב שלך. (מספר הסיביות במחשב שלך נקרא ארכיטקטורה של המחשב שלך.) אז גודל ושימוש בגודל של מחשב 32 סיביות זה כמו i32 ו- u32, וגודל ושימוש בגודל של מחשב 64 סיביות הוא כמו i64 ו- u64.</p>
+<p>ישנן סיבות רבות לסוגי המספרים השלמים השונים. סיבה אחת היא ביצועי מחשב: מספר קטן יותר של בתים מהיר יותר לעיבוד. לדוגמה, המספר -10 בתור i8 הוא 11110110, אך בתור i128 הוא 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110110. אבל הנה כמה שימושים אחרים:</p>
+<p>תווים ב-RUST נקראים char. לכל תו יש מספר: האות A היא מספר 65, ואילו התו 友 (&quot;חבר&quot; בסינית) הוא מספר 21451. רשימת המספרים נקראת &quot;Unicode .&quot;Unicode משתמש במספרים קטנים יותר עבור תווים המשמשים יותר, כמו A עד Z, ​​או ספרות 0 עד 9, או רווח.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> first_letter = <span class="hljs-string">'A'</span>;
+    <span class="hljs-keyword">let</span> space = <span class="hljs-string">' '</span>; <span class="hljs-comment">// A space inside ' ' is also a char</span>
+    <span class="hljs-keyword">let</span> other_language_char = <span class="hljs-string">'Ꮔ'</span>; <span class="hljs-comment">// Thanks to Unicode, other languages like Cherokee display just fine too</span>
+    <span class="hljs-keyword">let</span> cat_face = '😺'; <span class="hljs-comment">// Emojis are chars too</span>
+}
+</div></code></pre>
+<p>תווים ב-RUST נקראים char. לכל תו יש מספר: האות A היא מספר 65, ואילו התו 友 (&quot;חבר&quot; בסינית) הוא מספר 21451. רשימת המספרים נקראת &quot;Unicode .&quot;Unicode משתמש במספרים קטנים יותר עבור תווים המשמשים יותר, כמו A עד Z, ​​או ספרות 0 עד 9, או רווח.</p>
+<p>התווים הנפוצים ביותר ממוספרים עד-  256 , והם יכולים להשתלב ב-  u8 . זכור,  u8  הוא  0  בתוספת כל המספרים עד  255 , עבור  256  בסך הכל. משמעות הדבר היא ש-RUST יכולה להמיר בבטחה  u8  לתו, באמצעות- as. (&quot;ייצוג  u8  בתור char&quot; פירושו &quot;העמדת פנים  u8  הוא char&quot;)</p>
+<p>הצגה עם as שימושית כי RUST מאוד קפדנית. המהדר תמיד צריך לדעת את סוג המשתנה, ולא יאפשר לך להשתמש בשני סוגים שונים יחד גם אם שניהם מספרים שלמים. לדוגמה, זה לא יעבוד:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() { <span class="hljs-comment">// main() is where Rust programs start to run. Code goes inside {} (curly brackets)</span>
+
+    <span class="hljs-keyword">let</span> my_number = <span class="hljs-number">100</span>; <span class="hljs-comment">// We didn't write a type of integer,</span>
+                         <span class="hljs-comment">// so Rust chooses i32. Rust always</span>
+                         <span class="hljs-comment">// chooses i32 for integers if you don't</span>
+                         <span class="hljs-comment">// tell it to use a different type</span>
+			 
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, my_number <span class="hljs-keyword">as</span> <span class="hljs-built_in">char</span>); <span class="hljs-comment">// ⚠️</span>
+}
+</div></code></pre>
+<p>וזאת הסיבה:</p>
+<pre><code class="language-rust"><div>error[E0604]: only `<span class="hljs-built_in">u8</span>` can <span class="hljs-keyword">be</span> cast <span class="hljs-keyword">as</span> `<span class="hljs-built_in">char</span>`, not `<span class="hljs-built_in">i32</span>`
+ --&gt; src\main.rs:<span class="hljs-number">3</span>:<span class="hljs-number">20</span>
+  |
+<span class="hljs-number">3</span> |     <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, my_number <span class="hljs-keyword">as</span> <span class="hljs-built_in">char</span>);
+  |                    ^^^^^^^^^^^^^^^^^
+</div></code></pre>
+<p>למרבה המזל אנחנו יכולים לתקן את זה בקלות עם as. אנחנו לא יכולים להציג את  i32  כתו, אבל אנחנו יכולים להציג  i32  כ- u8. ואז נוכל לעשות את אותו הדבר מ-  u8  לתו. אז בשורה אחת אנו משתמשים בכדי להפוך את המספר שלי ל-  u8 , ושוב להפוך אותו לתו. עכשיו זה יעבוד:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_number = <span class="hljs-number">100</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, my_number <span class="hljs-keyword">as</span> <span class="hljs-built_in">u8</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">char</span>);
+}
+</div></code></pre>
+<p>זה מדפיס את d כי ממוספר במקום ה-100.</p>
+<p>הדרך הקלה יותר, עם זאת, היא רק לומר ל-RUST ש-  my_number  הוא  u8 . כך אתה עושה את זה:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> my_number: <span class="hljs-built_in">u8</span> = <span class="hljs-number">100</span>; <span class="hljs-comment">//  change my_number to my_number: u8</span>
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, my_number <span class="hljs-keyword">as</span> <span class="hljs-built_in">char</span>);
+}
+</div></code></pre>
+<p>אז אלה שתי סיבות לסוגי המספרים השונים ב-RUST. הנה סיבה נוספת: השימוש usize הוא הגודל שמשמשת Rust לאינדקסציה. (אינדקס פירושו &quot;איזה פריט הוא הראשון&quot;, &quot;איזה פריט הוא השני&quot; וכו ')  usize  הוא הגודל הטוב ביותר לאינדקס כי:</p>
+<pre><code>אינדקס לא יכול להיות שלילי, ולכן הוא צריך להיות מספר עם- u
+זה צריך להיות גדול, כי לפעמים אתה צריך להוסיף הרבה דברים לאינדקס, אבל
+זה לא יכול להיות u64 מכיוון שמחשבי 32 סיביות אינם יכולים להשתמש ב- u64.
+</code></pre>
+<p>אז Rust משתמש ב  usize  כך שהמחשב שלך יוכל לקבל את המספר הגדול ביותר לאינדקס שהוא יכול לקרוא.</p>
+<p>בואו ללמוד עוד קצת על  char . ראית תו הוא תמיד תו יחיד ומשתמש '' במקום &quot;&quot;.</p>
+<p>כל התווים הם 4 בתים. הם 4 בתים מכיוון שחלק מהתווים במחרוזת הם יותר מבית אחד. אותיות בסיסיות שתמיד היו במחשבים הן 1 בתים, תווים מאוחרים יותר הם 2 בתים, ואחרים הם 3 ו -4. תו צריך להיות 4 בתים כדי שהוא יכול להכיל כל סוג של תו.</p>
+<p>אנו יכולים להשתמש ב-  .len ()  כדי לראות זאת בעצמנו:</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, <span class="hljs-string">"a"</span>.len()); <span class="hljs-comment">// .len() gives the size in bytes</span>
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, <span class="hljs-string">"ß"</span>.len());
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, <span class="hljs-string">"国"</span>.len());
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"{}"</span>, <span class="hljs-string">"𓅱"</span>.len());
+}
+</div></code></pre>
+<p>זה ידפיס:</p>
+<pre><code class="language-rust"><div><span class="hljs-number">1</span>
+<span class="hljs-number">2</span>
+<span class="hljs-number">3</span>
+<span class="hljs-number">4</span>
+</div></code></pre>
+<p>ניתן לראות ש- a הוא בת אחד, הגרמני  ß  הוא שניים, היפני  国  הוא שלושה, והמצרי הקדום  𓅱  הוא 4 בתים.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> slice = <span class="hljs-string">"Hello!"</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Slice is {} bytes."</span>, slice.len());
+    <span class="hljs-keyword">let</span> slice2 = <span class="hljs-string">"안녕!"</span>; <span class="hljs-comment">// Korean for "hi"</span>
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Slice2 is {} bytes."</span>, slice2.len());
+}
+</div></code></pre>
+<p>זה ידפיס:</p>
+<pre><code class="language-rust"><div>Slice is <span class="hljs-number">6</span> bytes.
+Slice2 is <span class="hljs-number">7</span> bytes.
+</div></code></pre>
+<p>האורך של slice הוא 6 תווים ו -6 בתים, אך אורך slice2 הוא 3 תווים ו -7 בתים. </p>
+<p>אם  .len ()  נותן את הגודל בבתים, מה לגבי הגודל בתווים? נלמד על שיטות אלה בהמשך, אך אתה רק יכול לזכור ש  .chars (). Count ()  יעשה את זה.  .chars (). count ()  הופך את מה שכתבת לדמויות ואז סופר כמה יש.</p>
+<pre><code class="language-rust"><div><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">let</span> slice = <span class="hljs-string">"Hello!"</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Slice is {} bytes and also {} characters."</span>, slice.len(), slice.chars().count());
+    <span class="hljs-keyword">let</span> slice2 = <span class="hljs-string">"안녕!"</span>;
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Slice2 is {} bytes but only {} characters."</span>, slice2.len(), slice2.chars().count());
+}
+</div></code></pre>
+<p>זה ידפיס:</p>
+<pre><code class="language-rust"><div>Slice is <span class="hljs-number">6</span> bytes and also <span class="hljs-number">6</span> characters.
+Slice2 is <span class="hljs-number">7</span> bytes but only <span class="hljs-number">3</span> characters.
+</div></code></pre>
+
+<br>
+<button onclick="window.location.href='./Type_inference.html';">
+    הבא
+  </button>
+    </body>
+    </html>
