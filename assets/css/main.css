@@ -3381,7 +3381,7 @@ input, select, textarea {
 	  */
 	  
 	  .menu {
-		width:16vw;
+		width:30vw;
 		min-width:16ch;
 		display:flex;
 		flex-flow:column nowrap;
@@ -3389,12 +3389,13 @@ input, select, textarea {
 		position:relative;
 		transform:rotate(-30deg);
 		color: rgb(0, 0, 0);
+		padding-left: 10rem;
 	  }
 	  
 	  .menu::before {
 		content:"/";
 		align-self:center;
-		transform:rotate(30deg);
+		transform:rotate(15deg);
 		margin-bottom:1rem;
 	  }
 	  
